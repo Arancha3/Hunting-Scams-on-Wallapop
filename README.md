@@ -13,6 +13,8 @@ El sistema simula una tubería de detección de fraude (Fraud Detection Pipeline
 
 **Miembros del grupo:**
 - 
+-
+-
 **Categoría elegida:** `Smartphones`
 **ID de Categoría:** 24201
 
@@ -50,12 +52,13 @@ El sistema está optimizado para detectar patrones de fraude específicos de la 
 
 ---
 **Puntuación de Riesgo**
-| Señal                | Condición                                                | Puntos
-|----------------------|----------------------------------------------------------|
-| Price Anomaly        | Precio <50% de la mediana de la colección                | +40
-| Keyword Match        | Palabras clave como: Urgente, Sin caja, chollo, solo hoy | +20
-| High Seller Activity | Vendedor con >20 publicaciones en la colección de hoy    | +20
-| Short Description    | Descripción <20 caracteres                               | +10
+
+| Señal                | Condición                                                | Puntos |
+|----------------------|----------------------------------------------------------|        |
+| Price Anomaly        | Precio <50% de la mediana de la colección                | +40    |
+| Keyword Match        | Palabras clave como: Urgente, Sin caja, chollo, solo hoy | +20    |
+| High Seller Activity | Vendedor con >20 publicaciones en la colección de hoy    | +20    |
+| Short Description    | Descripción <20 caracteres                               | +10    |
 
 
 **Cómo ejecutar el poller**
