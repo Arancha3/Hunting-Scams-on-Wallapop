@@ -73,29 +73,57 @@ Estrategia: Consulta a la API usando el filtro obligatorio time_filter: today .
 Comandos de Ejecución (Usando tmux):
 
 1. Iniciar la sesión de tmux:
-    ``` tmux new -s wallapop_poller ```
+    ``` tmux new -s win1 ```
 
-3. Ejecutar el script dentro de la sesión de tmux: 
-    ``` python3 poller/poller.py ```
-
+2. Ejecutar el script dentro de la sesión de tmux: 
+    ``` python3 poller.py ```
+3. Guardar datos cada media hora en formato JSON
+   
 4. Desconectar (detach) de la sesión de tmux (dejar corriendo en segundo plano):
    ``` Ctrl + B, luego D ```
 5. Verificación: 
     Para volver a la sesión y ver los logs del Poller, usamos
-  ```  tmux attach -t wallapop_poller ```
+  ```  tmux attach -t win1 ```
 
 ---
 
 **Cómo ingresar datos en Elasticsearch**
+1. Dejamos el poller ejecutándose periódicamente (usando tmux) y guardamos los datos de hoy en formato JSON.
 
+    - El poller escribe el archivo en un directorio específico que el Agente está vigilando (/var/log/wallapop/...)
+      
+2. Elastic Agent lee el archivo JSON y envía custom Logs
 
-**Cómo ejecutar ElastAlert (local / en vivo)**
+    - En Fleet se configura la integración "Custom Logs"
+      
+    - Monitorea la carpeta configurada (/var/log/wallapop/...)
 
+    - Cuando se genera o se actualiza un archivo nuevo, el agente lee cada línea como objeto JSON independiente.
+
+    - Ahora que ya tiene todos los archivos, el agente envía los documentos directamente a Elasticsearch
+      
+3. Elasticsearch Gestiona Data Stream
+
+    - Elasticsearch recibe los datos en un Data Stream (logs-wallapop.default?)
+
+    - Fleet y Data Stream se encargan automáticamente de crear las plantillas de índice, mapeos, políticas de rotación.
+   
+---
+
+**Cómo ejecutar ElastAlert**
+1. Requisitos Previos
+    - Configuración principal (config.yaml): Verificar que el archivo (.yaml) apunte a instancia de Elasticsearch
+    -  Reglas bien guardadas: Verificar que las reglas de alerta (low_price.yaml, high_risk.yaml) estén guardadas en la carpeta...
+    -  Datos de alto riesgo: Asegurarse de que el poller ha ingerido datos donde el campo enrichment.risk_score es 70 ya que son necesarios para que la alerta se dispare.
+2. 
+---
 
 ## **🖼️Visualizaciones (Evidencia de Funcionamiento)**
-Toda la evidencia de funcionamiento se encuentra en las carpetas de capturas de pantalla:
+- Toda la evidencia de funcionamiento se encuentra en las carpetas de capturas de pantalla:
+
     - kibana/screenshots/: Contiene el Fraud Radar Dashboard ensamblado, demostrando la operatividad de las visualizaciones requeridas (Price Histogram, Geo Map, etc.)
     - elastalert/screenshots/: Contiene la prueba de la alerta disparada (ej., el log de Elastalert que muestra un match)
 
+---
 ## **Conclusiones**
 Resultados: 
