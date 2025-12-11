@@ -280,7 +280,7 @@ poller/
 
 Preguntas ChatGPT.pdf
 README.md
-DETECCIÓN DE ESTAFADORES EN WALLAPOP.pptx
+PRESENTACIÓN.pptx
 ```
 
 ---
