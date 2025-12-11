@@ -24,17 +24,13 @@ El sistema simula una tubería de detección de fraude (Fraud Detection Pipeline
 - **Python:** Se recomienda 3.8 o superior                               
 - **ElastAlert:** configurado para leer desde el índice de Wallapop
 ---
-## **Estructura del proyecto (archivos importantes):**
+## **Estructura del proyecto subido a github:**
 ``` text
 wallapop-fraud-lab/
 ├── poller/                              # Adquisición Enriquecimiento y Risk Scoring
-│   ├── poller.py                        # Script principal (adquisición, enriquecimiento, escritura JSON Lines)
-│   └── README.md
+│   └── poller.py                        # Script principal (adquisición, enriquecimiento, escritura JSON Lines)
 ├── ingestion/                           # Ingesta en Elasticsearch/Fleet
-│   ├── fleet_integration.md
-│   └── example_daily_json/              # Muestra de datos finales (al menos 20 ítems)
-├── kibana/                              # Visualización y Dashboards
-│   └── screenshots/                     # Capturas de pantalla de dashboards y visualizaciones
+│   └── wallapop_smartphones_json/              # Muestra de datos finales (al menos 20 ítems)
 ├── elastalert/                          # Sistema de Alertas
 │   ├── config.yaml                      # Configuración del Elastalert2
 │   └── rules/                           # Reglas de alerta YAML
