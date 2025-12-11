@@ -18,7 +18,7 @@ El sistema simula una tubería de detección de fraude (Fraud Detection Pipeline
 
 **Categoría elegida:** `Smartphones`
 
-**ID de Categoría:** `24201`
+**ID de Categoría:** `9447`
 
 **Requisitos:**
 - **Python:** Se recomienda 3.8 o superior                               
