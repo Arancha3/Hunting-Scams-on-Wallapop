@@ -1,13 +1,13 @@
 
-# 🕵️ Wallapop Fraud Radar — Smartphone Monitoring Pipeline  
-**Asignatura:** Network Monitoring (NM) — Wallapop Fraud Detection Lab  
-**Categoría analizada:** *Smartphones* (Taxonomía ID: **9447**)  
+# Wallapop Fraud Radar — Smartphone Monitoring Pipeline  
+**Asignatura:** Network Management (NM) — Wallapop Fraud Detection Lab  
+**Categoría analizada:** *Smartphones* (Taxonomía ID: **9447**)  Marcas 'Iphone', 'Samsung' y 'Xiaomi'.
 **Python utilizado:** **3.9.2**  
 **Entorno:** Máquinas virtuales del laboratorio (Ubuntu ELK + Ubuntu Agent)
 
 ---
 
-# 📌 1. Descripción General del Proyecto
+# 1. Descripción General del Proyecto
 
 Este proyecto implementa un pipeline completo de:
 
@@ -21,14 +21,14 @@ El objetivo es detectar patrones de fraude en la categoría **Smartphones**, uti
 
 ---
 
-# 📌 2. Ejecución del Poller en las máquinas virtuales
+# 2. Ejecución del Poller en las máquinas virtuales
 
 Todo el trabajo se ha realizado sobre las máquinas virtuales del laboratorio.
 
-El archivo `poller.py` se ha colocado en el servidor **elastic** dentro del directorio principal del proyecto.  
+El archivo `poller.py` se ha colocado en el servidor **elastic** dentro del directorio home del usuario root.  
 El poller se ejecuta continuamente mediante **tmux**, permitiendo que siga funcionando aunque la sesión SSH se cierre.
 
-## 🖥️ Ejecución con tmux
+## Ejecución con tmux
 
 1. Crear sesión:
 ```bash
@@ -50,16 +50,16 @@ Ctrl + B, luego D
 tmux attach -t win2
 ```
 
-## 🕒 Frecuencia  
+## Frecuencia  
 El poller ejecuta el ciclo **cada 30 minutos**, obteniendo anuncios nuevos y enriqueciéndolos con un risk score.
 
 ---
 
-# 📌 3. Funciones principales del Poller
+# 3. Funciones principales del Poller
 
 El archivo `poller.py` realiza:
 
-## ✔ 3.1. Filtrado por taxonomía 9447 (Smartphones)
+## 3.1. Filtrado por taxonomía 9447 (Smartphones)
 
 Los smartphones se obtienen por:
 
@@ -70,7 +70,7 @@ Los smartphones se obtienen por:
 taxonomy_id = 9447
 ```
 
-## ✔ 3.2. Cálculo de Risk Score (0–100)
+## 3.2. Cálculo de Risk Score (0–100)
 
 Reglas implementadas:
 
@@ -97,7 +97,7 @@ Toda la información se guarda bajo:
 }
 ```
 
-## ✔ 3.3. Guardado de resultados en JSON diario
+## 3.3. Guardado de resultados en JSON diario
 
 Cada ciclo guarda los resultados en:
 
@@ -109,23 +109,23 @@ Formato: **JSON Lines**, 1 anuncio por línea.
 
 ---
 
-# 📌 4. Ingesta de datos mediante Fleet (Elastic Agent)
+# 4. Ingesta de datos mediante Fleet (Elastic Agent)
 
 Utilizamos **Elastic Agent + Fleet Server Policy**, ya configurado previamente en prácticas anteriores.
 
 Se añadió una integración del tipo **Custom Logs (Filestream)**:
 
-## 📂 Rutas monitorizadas:
+## Rutas monitorizadas:
 ```text
 /var/log/wallapop/wallapop_smartphones_*.json
 ```
 
-## 📦 Dataset configurado:
+## Dataset configurado:
 ```text
 wallapop_project
 ```
 
-## 📌 Data stream generado automáticamente:
+## Data stream generado automáticamente:
 ```text
 logs-wallapop-default
 ```
@@ -134,13 +134,13 @@ Fleet detecta automáticamente los nuevos JSON y los envía a Elasticsearch.
 
 ---
 
-# 📌 5. Mapeo de campos del JSON en Elasticsearch
+# 5. Mapeo de campos del JSON en Elasticsearch
 
 Al ingerir los datos, es necesario asegurar que ciertos campos del JSON se indexen correctamente.
 
 Los campos **asegurados mediante mapeo/mapping** son:
 
-## ✔ Campo `publication_time_at` → tipo **date**
+## Campo `publication_time_at` → tipo **date**
 
 Este campo, generado en el poller, normaliza todos los timestamps posibles del API de Wallapop (ISO8601, UNIX segundos, milisegundos, etc.).
 
@@ -158,7 +158,7 @@ Esto permite:
 - filtrar por ventanas temporales,
 - usarlo como time-field en Discover si se desea.
 
-## ✔ Campo `location_geo` → tipo **geo_point**
+## Campo `location_geo` → tipo **geo_point**
 
 El poller genera automáticamente:
 
@@ -180,7 +180,7 @@ Esto habilita:
 - clustering geográfico,
 - búsquedas por radio.
 
-## ✔ El resto de campos JSON son interpretados automáticamente por Fleet
+## El resto de campos JSON son interpretados automáticamente por Fleet
 
 Fleet genera:
 
@@ -191,11 +191,11 @@ Fleet genera:
 
 ---
 
-# 📌 6. Dashboards creados en Kibana
+# 6. Dashboards creados en Kibana
 
 Se han generado dos dashboards principales:
 
-## 📊 6.1 Wallapop Dashboard
+## 6.1 Wallapop Dashboard
 Incluye:
 
 - Histograma de precios  
@@ -205,7 +205,7 @@ Incluye:
 - Mapa geográfico usando `location_geo`  
 - Distribución por categorías/taxonomía  
 
-## 📊 6.2 Risk Smartphones Dashboard
+## 6.2 Risk Smartphones Dashboard
 
 Devoted to fraud analysis:
 
@@ -223,7 +223,7 @@ kibana/CAPTURAS.pdf
 
 ---
 
-# 📌 7. Configuración de Elastalert2
+# 7. Configuración de Elastalert2
 
 Elastalert2 se ha instalado en la máquina elastic:
 
@@ -241,13 +241,13 @@ pip3 install elastalert
         └── 03_suspicious_keywords.yaml
 ```
 
-## ✔ Reglas implementadas:
+## Reglas implementadas:
 
 1. **Low Price Alert**  
 2. **High Risk Score Alert (>= 70)**  
 3. **Suspicious Keyword Alert**
 
-## ✔ Logs de Elastalert
+## Logs de Elastalert
 
 Los logs de estado se visualizan en Elasticsearch bajo el índice:
 
@@ -257,7 +257,7 @@ elastalert_status
 
 ---
 
-# 📌 8. Estructura del repositorio (según la entrega)
+# 8. Estructura del repositorio en github
 
 ```text
 elastalert/
@@ -268,7 +268,7 @@ elastalert/
 │── config.yaml
 
 ingestion/
-│── wallapop_smartphones_<fecha>.json
+│── wallapop_smartphones_<fecha>.json (ejemplo de móviles observados en un día)
 
 kibana/
 │── CAPTURAS.pdf
@@ -280,11 +280,12 @@ poller/
 
 Preguntas ChatGPT.pdf
 README.md
+DETECCIÓN DE ESTAFADORES EN WALLAPOP.pptx
 ```
 
 ---
 
-# 📌 9. Conclusión
+# 9. Conclusión
 
 El pipeline desarrollado:
 
