@@ -30,13 +30,22 @@ wallapop-fraud-lab/
 ├── poller/                              # Adquisición Enriquecimiento y Risk Scoring
 │   └── poller.py                        # Script principal (adquisición, enriquecimiento, escritura JSON Lines)
 ├── ingestion/                           # Ingesta en Elasticsearch/Fleet
-│   └── wallapop_smartphones_json/       # Muestra de datos finales (al menos 20 ítems)
+│   └── wallapop_smartphones_20251207.json/    # Muestra de datos finales (al menos 20 ítems)
 ├── elastalert/                          # Sistema de Alertas
 │   ├── config.yaml                      # Configuración del Elastalert2
 │   └── rules/                           # Reglas de alerta YAML
 │       ├── 01_low_price.yaml            # Alerta de precio anómalo 
 │       ├── 02_high_risk.yaml            # Alerta de riesgo >= 70 
-└──     └── 03_suspicious_keywords.yaml  # Alerta de keywords sospechosos
+│       └── 03_suspicious_keywords.yaml  # Alerta de keywords sospechosos
+├── kibana/
+│   ├── Risk Smartphones.ndjson
+│   ├── Wallapop Dashboard.ndjson
+│   └── CAPTURAS.pdf
+├── Preguntas Chatgpt.pdf
+├── README.md
+└── PRESENTACIÓN.pptx
+
+
 
 ```
 ---
