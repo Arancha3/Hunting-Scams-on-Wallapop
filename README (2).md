@@ -193,8 +193,9 @@ Fleet genera:
 
 # 6. Dashboards creados en Kibana
 
-Se han generado dos dashboards principales:
-
+Se han generado dos dashboards principales, en los cuales aplicamos un filtro por taxonomía para que en las gráficas generadas únicamente aparezcan smartphones:
+El comando de filtrado es el siguiente: 
+taxonomy.id : 8447
 ## 6.1 Wallapop Dashboard
 Incluye:
 
@@ -247,6 +248,8 @@ pip3 install elastalert
 2. **High Risk Score Alert (>= 70)**  
 3. **Suspicious Keyword Alert**
 
+Una vez se generan alertas, podemos encontrar en el campo match_body características importantes del anuncio que ha producio la alerta. Para que únicamente nos muestre en la gráfica los anuncios de smartphones que generan alerta, añadimos el filtro:
+match_body.taxonomy.id : 9447
 ## Logs de Elastalert
 
 Los logs de estado se visualizan en Elasticsearch bajo el índice:
