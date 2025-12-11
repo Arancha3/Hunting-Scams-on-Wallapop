@@ -27,23 +27,23 @@ El sistema simula una tubería de detección de fraude (Fraud Detection Pipeline
 ## **Estructura del proyecto subido a github:**
 ``` text
 wallapop-fraud-lab/
-├── poller/                              # Adquisición Enriquecimiento y Risk Scoring
-│   └── poller.py                        # Script principal (adquisición, enriquecimiento, escritura JSON Lines)
-├── ingestion/                           # Ingesta en Elasticsearch/Fleet
-│   └── wallapop_smartphones_20251207.json/    # Muestra de datos finales (al menos 20 ítems)
-├── elastalert/                          # Sistema de Alertas
-│   ├── config.yaml                      # Configuración del Elastalert2
-│   └── rules/                           # Reglas de alerta YAML
-│       ├── 01_low_price.yaml            # Alerta de precio anómalo 
-│       ├── 02_high_risk.yaml            # Alerta de riesgo >= 70 
-│       └── 03_suspicious_keywords.yaml  # Alerta de keywords sospechosos
-├── kibana/
-│   ├── Risk Smartphones.ndjson
-│   ├── Wallapop Dashboard.ndjson
-│   └── CAPTURAS.pdf
-├── Preguntas Chatgpt.pdf
-├── README.md
-└── PRESENTACIÓN.pptx
+├── poller/                                    # Adquisición Enriquecimiento y Risk Scoring
+│   └── poller.py                              # Script principal (adquisición, enriquecimiento, escritura JSON Lines)
+├── ingestion/                                 # Ingesta en Elasticsearch/Fleet
+│   └── wallapop_smartphones_20251207.json/    # Muestra de datos finales 
+├── elastalert/                                # Sistema de Alertas
+│   ├── config.yaml                            # Configuración del Elastalert2
+│   └── rules/                                 # Reglas de alerta YAML
+│       ├── 01_low_price.yaml                  # Alerta de precio anómalo 
+│       ├── 02_high_risk.yaml                  # Alerta de riesgo >= 70 
+│       └── 03_suspicious_keywords.yaml        # Alerta de keywords sospechosos
+├── kibana/                                    # Dahsborad y visualizaciones
+│   ├── Risk Smartphones.ndjson                #  Dahsborad de riesgo de smartphones
+│   ├── Wallapop Dashboard.ndjson              # Dashboard general del proyecto
+│   └── CAPTURAS.pdf                           # Capturas de las gráficas de Kibana
+├── Preguntas Chatgpt.pdf                      # Preguntas y respuestas del proyeto
+├── README.md                                  # Documentación principal del proyecto
+└── PRESENTACIÓN.pptx                          # Presentación para exposición
 
 
 
