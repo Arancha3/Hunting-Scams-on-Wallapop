@@ -1,0 +1,14 @@
+name: "Wallapop: High Risk Score Alert"
+type: any
+index: "logs-wallapop-default"
+
+timestamp_field: "@timestamp"
+
+filter:
+  - range:
+      enrichment.risk_score:
+        gte: 60
+
+alert:
+  - "debug"
+

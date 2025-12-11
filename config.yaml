@@ -1,0 +1,21 @@
+rules_folder: /etc/elastalert/rules
+run_every:
+  minutes: 1
+buffer_time:
+  minutes: 15
+es_host: localhost
+es_port: 9200
+writeback_index: elastalert_status
+
+# AUTENTICACIÓN
+es_username: "elastic"
+es_password: "mlJZP3AuDE0pr4q1Rwq8"
+
+# Desactivamos SSL para evitar líos de certificados en local
+use_ssl: true
+ca_certs: ""
+verify_certs: false
+alert_time_limit:
+  days: 2 
+
+verbose: 0

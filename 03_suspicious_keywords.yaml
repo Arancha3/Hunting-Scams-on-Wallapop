@@ -1,0 +1,14 @@
+name: "Wallapop: Suspicious Keywords"
+type: any
+index: "logs-wallapop-default"
+
+timestamp_field: "@timestamp"
+
+filter:
+  - query:
+      query_string:
+        query: "enrichment.suspicious_keywords:*"
+
+alert:
+  - "debug"
+
