@@ -125,5 +125,3 @@ Comandos de Ejecución (Usando tmux):
     - elastalert/screenshots/: Contiene la prueba de la alerta disparada (ej., el log de Elastalert que muestra un match)
 
 ---
-## **Conclusiones**
-Resultados: 
