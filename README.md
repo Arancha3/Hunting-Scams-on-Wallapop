@@ -27,19 +27,21 @@ El sistema simula una tubería de detección de fraude (Fraud Detection Pipeline
 ## **Estructura del proyecto (archivos importantes):**
 ``` text
 wallapop-fraud-lab/
-├── poller/                     # Adquisición Enriquecimiento y Risk Scoring
-│   ├── poller.py               # Script principal (adquisición, enriquecimiento, escritura JSON Lines)
+├── poller/                              # Adquisición Enriquecimiento y Risk Scoring
+│   ├── poller.py                        # Script principal (adquisición, enriquecimiento, escritura JSON Lines)
 │   └── README.md
-├── ingestion/                  # Ingesta en Elasticsearch/Fleet
+├── ingestion/                           # Ingesta en Elasticsearch/Fleet
 │   ├── fleet_integration.md
-│   └── example_daily_json/     # Muestra de datos finales (al menos 20 ítems)
-├── kibana/                     # Visualización y Dashboards
-│   └── screenshots/            # Capturas de pantalla de dashboards y visualizaciones
-├── elastalert/                 # Sistema de Alertas
-│   ├── config.yaml             # Configuración del Elastalert2
-│   └── rules/                  # Reglas de alerta YAML
-│       ├── low_price.yaml      # Alerta de precio anómalo (Sección 9.4.1)
-└──     └── high_risk.yaml      # Alerta de riesgo >= 70 (Sección 9.4.2)
+│   └── example_daily_json/              # Muestra de datos finales (al menos 20 ítems)
+├── kibana/                              # Visualización y Dashboards
+│   └── screenshots/                     # Capturas de pantalla de dashboards y visualizaciones
+├── elastalert/                          # Sistema de Alertas
+│   ├── config.yaml                      # Configuración del Elastalert2
+│   └── rules/                           # Reglas de alerta YAML
+│       ├── 01_low_price.yaml            # Alerta de precio anómalo 
+│       ├── 02_high_risk.yaml            # Alerta de riesgo >= 70 
+│       └── 03_suspicious_keywords.yaml  # Alerta de keywords sospechosos
+└──
 ```
 ---
 ## **🚨Análisis y Lógica de Sospecha**
@@ -113,7 +115,7 @@ Comandos de Ejecución (Usando tmux):
 **Cómo ejecutar ElastAlert**
 1. Requisitos Previos
     - Configuración principal (config.yaml): Verificar que el archivo (.yaml) apunte a instancia de Elasticsearch
-    -  Reglas bien guardadas: Verificar que las reglas de alerta (low_price.yaml, high_risk.yaml) estén guardadas en la carpeta...
+    -  Reglas bien guardadas: Verificar que las reglas de alerta (low_price.yaml, high_risk.yaml...) estén guardadas en la carpeta...
     -  Datos de alto riesgo: Asegurarse de que el poller ha ingerido datos donde el campo enrichment.risk_score es 70 ya que son necesarios para que la alerta se dispare.
 2. 
 ---
