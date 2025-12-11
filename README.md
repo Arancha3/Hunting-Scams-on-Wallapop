@@ -53,12 +53,21 @@ El sistema está optimizado para detectar patrones de fraude específicos de la 
 ---
 ## **Puntuación de Riesgo**
 
-| Señal                | Condición                                                | Puntos |
-|----------------------|----------------------------------------------------------|--------|
-| Price Anomaly        | Precio <50% de la mediana de la colección                | +40    |
-| Keyword Match        | Palabras clave como: Urgente, Sin caja, chollo, solo hoy | +20    |
-| High Seller Activity | Vendedor con >20 publicaciones en la colección de hoy    | +20    |
-| Short Description    | Descripción <20 caracteres                               | +10    |
+| Categoría                      | Condición                                                | Puntos |
+|--------------------------------|----------------------------------------------------------|--------|
+| Price Anomaly                  | Precio <50% de la mediana de la colección                | +40    |
+| Extremely low price            | Precio < 30€                                             | +20    |
+| Keyword suspicion              | Palabras clave como: Urgente, Sin caja, chollo, solo hoy | +20    |
+| Seller high behaviour          | Vendedor con >20 publicaciones en la colección de hoy    | +20    |
+| Seller 1 post                  | Vendedor con exactamente una publicación                 | +10    |
+| Short Description              | Descripción <20 caracteres                               | +10    |
+| Old models overpriced          | Modelo antiguo con precio > 1.5 veces la mediana         | +10    |
+| High-end with weak description | Modelo high-end con descripción < 30 caracteres          | +20    |
+| Generic title                  | Título es "movil", "smartphone" o "teléfono"             | +15    |
+| Repeated images                | Imágenes repetidas (si la mitad de imágenes son iguales) | +10    |
+| Only one image                 | El articulo tiene solo una imagen                        | +15    |
+| Contradiction in text          | Descripción incluye "no funciona" y precio > 100€        | +10    |
+| Puntuación máxima              | La suma de puntos se limita a 100                        |  100   |
 
 ## EJECUCIONES
 **Cómo ejecutar el poller**
